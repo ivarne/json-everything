@@ -48,7 +48,6 @@ public class ContainsKeyword : IJsonSchemaKeyword, IRefResolvable, ISchemaContai
 		var schemaValueType = context.LocalInstance.GetSchemaValueType();
 		if (schemaValueType != SchemaValueType.Array)
 		{
-			context.LocalResult.Pass();
 			context.WrongValueKind(schemaValueType);
 			return;
 		}
@@ -69,16 +68,12 @@ public class ContainsKeyword : IJsonSchemaKeyword, IRefResolvable, ISchemaContai
 		if (minContainsKeyword is { Value: 0 })
 		{
 			context.LocalResult.SetAnnotation(Name, JsonSerializer.SerializeToNode(validIndices));
-			context.LocalResult.Pass();
 			context.NotApplicable(() => $"{MinContainsKeyword.Name} is 0.");
 			return;
 		}
 
 		if (validIndices.Any())
-		{
 			context.LocalResult.SetAnnotation(Name, JsonSerializer.SerializeToNode(validIndices));
-			context.LocalResult.Pass();
-		}
 		else
 			context.LocalResult.Fail(Name, ErrorMessages.Contains);
 		context.ExitKeyword(Name, context.LocalResult.IsValid);
