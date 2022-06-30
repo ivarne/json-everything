@@ -103,8 +103,9 @@ public class UnevaluatedPropertiesKeyword : IJsonSchemaKeyword, IRefResolvable, 
 			}
 
 			context.Log(() => $"Validating property '{property.Key}'.");
-			context.Push(context.InstanceLocation.Combine(PointerSegment.Create($"{property.Key}")), item);
-			Schema.ValidateSubschema(context);
+			context.Push(context.InstanceLocation.Combine(PointerSegment.Create($"{property.Key}")), item,
+				context.EvaluationPath.Combine(Name), Schema);
+			context.Validate();
 			var localResult = context.LocalResult.IsValid;
 			overallResult &= localResult;
 			context.Log(() => $"Property '{property.Key}' {localResult.GetValidityString()}.");
