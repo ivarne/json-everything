@@ -1,3 +1,32 @@
+# [3.1.5](https://github.com/gregsdennis/json-everything/pull/300)
+
+Added `JsonSchemaBuilderExtensions.PatternProperties()` overloads that take strings in place of `Regex`es.  There is no syntax highlighting support for these overloads, however.
+
+# [3.1.5](https://github.com/gregsdennis/json-everything/pull/299)
+
+🤦There were multiple issues with the meta-schemas because the self-validation tests were initially disabled (equality hadn't been implemented yet).  Re-enabling these tests highlighted several problems.
+
+- All meta-schemas adjusted to conform to online versions.
+- It's `contentEncoding` not `contentMediaEncoding`...
+
+# 3.1.4 (No PR)
+
+Continuation of v3.1.3 - Fixed array-valued `items`.
+
+# [3.1.3](https://github.com/gregsdennis/json-everything/pull/297)
+
+Fixed an issue with handling JSON null in instance data for keywords which change the instance location:
+
+- `additionalItems`
+- `additionalProperties`
+- `contains`
+- `items`
+- `patternProperties`
+- `prefixItems`
+- `properties`
+- `unevaluatedItems`
+- `unevaluatedProperties`
+
 # [3.1.2](https://github.com/gregsdennis/json-everything/pull/294)
 
 Updated `min*`/`max*` keywords to accept numbers with decimals as long as they still represent non-negative integer values, e.g. `1.0`.
