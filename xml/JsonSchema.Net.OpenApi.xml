@@ -38,25 +38,35 @@
             The value can be null, a primitive, an array or an object.
             </param>
         </member>
-        <member name="M:Json.Schema.OpenApi.DiscriminatorKeyword.Validate(Json.Schema.ValidationContext)">
+        <member name="M:Json.Schema.OpenApi.DiscriminatorKeyword.GetConstraint(Json.Schema.SchemaConstraint,System.Collections.Generic.IReadOnlyList{Json.Schema.KeywordConstraint},Json.Schema.EvaluationContext)">
             <summary>
-            Provides validation for the keyword.
+            Builds a constraint object for a keyword.
             </summary>
-            <param name="context">Contextual details for the validation process.</param>
+            <param name="schemaConstraint">The <see cref="T:Json.Schema.SchemaConstraint"/> for the schema object that houses this keyword.</param>
+            <param name="localConstraints">
+            The set of other <see cref="T:Json.Schema.KeywordConstraint"/>s that have been processed prior to this one.
+            Will contain the constraints for keyword dependencies.
+            </param>
+            <param name="context">The <see cref="T:Json.Schema.EvaluationContext"/>.</param>
+            <returns>A constraint object.</returns>
         </member>
-        <member name="M:Json.Schema.OpenApi.DiscriminatorKeyword.Equals(Json.Schema.OpenApi.DiscriminatorKeyword)">
-            <summary>Indicates whether the current object is equal to another object of the same type.</summary>
-            <param name="other">An object to compare with this object.</param>
-            <returns>true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.</returns>
+        <member name="T:Json.Schema.OpenApi.DiscriminatorKeywordJsonConverter">
+            <summary>
+            JSON converter for <see cref="T:Json.Schema.OpenApi.DiscriminatorKeyword"/>.
+            </summary>
         </member>
-        <member name="M:Json.Schema.OpenApi.DiscriminatorKeyword.Equals(System.Object)">
-            <summary>Determines whether the specified object is equal to the current object.</summary>
-            <param name="obj">The object to compare with the current object.</param>
-            <returns>true if the specified object  is equal to the current object; otherwise, false.</returns>
+        <member name="M:Json.Schema.OpenApi.DiscriminatorKeywordJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>Reads and converts the JSON to type <see cref="T:Json.Schema.OpenApi.DiscriminatorKeyword"/>.</summary>
+            <param name="reader">The reader.</param>
+            <param name="typeToConvert">The type to convert.</param>
+            <param name="options">An object that specifies serialization options to use.</param>
+            <returns>The converted value.</returns>
         </member>
-        <member name="M:Json.Schema.OpenApi.DiscriminatorKeyword.GetHashCode">
-            <summary>Serves as the default hash function.</summary>
-            <returns>A hash code for the current object.</returns>
+        <member name="M:Json.Schema.OpenApi.DiscriminatorKeywordJsonConverter.Write(System.Text.Json.Utf8JsonWriter,Json.Schema.OpenApi.DiscriminatorKeyword,System.Text.Json.JsonSerializerOptions)">
+            <summary>Writes a specified value as JSON.</summary>
+            <param name="writer">The writer to write to.</param>
+            <param name="value">The value to convert to JSON.</param>
+            <param name="options">An object that specifies serialization options to use.</param>
         </member>
         <member name="T:Json.Schema.OpenApi.ExampleKeyword">
             <summary>
@@ -74,25 +84,35 @@
             </summary>
             <param name="value">The example value.</param>
         </member>
-        <member name="M:Json.Schema.OpenApi.ExampleKeyword.Validate(Json.Schema.ValidationContext)">
+        <member name="M:Json.Schema.OpenApi.ExampleKeyword.GetConstraint(Json.Schema.SchemaConstraint,System.Collections.Generic.IReadOnlyList{Json.Schema.KeywordConstraint},Json.Schema.EvaluationContext)">
             <summary>
-            Provides validation for the keyword.
+            Builds a constraint object for a keyword.
             </summary>
-            <param name="context">Contextual details for the validation process.</param>
+            <param name="schemaConstraint">The <see cref="T:Json.Schema.SchemaConstraint"/> for the schema object that houses this keyword.</param>
+            <param name="localConstraints">
+            The set of other <see cref="T:Json.Schema.KeywordConstraint"/>s that have been processed prior to this one.
+            Will contain the constraints for keyword dependencies.
+            </param>
+            <param name="context">The <see cref="T:Json.Schema.EvaluationContext"/>.</param>
+            <returns>A constraint object.</returns>
         </member>
-        <member name="M:Json.Schema.OpenApi.ExampleKeyword.Equals(Json.Schema.OpenApi.ExampleKeyword)">
-            <summary>Indicates whether the current object is equal to another object of the same type.</summary>
-            <param name="other">An object to compare with this object.</param>
-            <returns>true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.</returns>
+        <member name="T:Json.Schema.OpenApi.ExampleKeywordJsonConverter">
+            <summary>
+            JSON converter for <see cref="T:Json.Schema.OpenApi.ExampleKeyword"/>.
+            </summary>
         </member>
-        <member name="M:Json.Schema.OpenApi.ExampleKeyword.Equals(System.Object)">
-            <summary>Determines whether the specified object is equal to the current object.</summary>
-            <param name="obj">The object to compare with the current object.</param>
-            <returns>true if the specified object  is equal to the current object; otherwise, false.</returns>
+        <member name="M:Json.Schema.OpenApi.ExampleKeywordJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>Reads and converts the JSON to type <see cref="T:Json.Schema.OpenApi.ExampleKeyword"/>.</summary>
+            <param name="reader">The reader.</param>
+            <param name="typeToConvert">The type to convert.</param>
+            <param name="options">An object that specifies serialization options to use.</param>
+            <returns>The converted value.</returns>
         </member>
-        <member name="M:Json.Schema.OpenApi.ExampleKeyword.GetHashCode">
-            <summary>Serves as the default hash function.</summary>
-            <returns>A hash code for the current object.</returns>
+        <member name="M:Json.Schema.OpenApi.ExampleKeywordJsonConverter.Write(System.Text.Json.Utf8JsonWriter,Json.Schema.OpenApi.ExampleKeyword,System.Text.Json.JsonSerializerOptions)">
+            <summary>Writes a specified value as JSON.</summary>
+            <param name="writer">The writer to write to.</param>
+            <param name="value">The value to convert to JSON.</param>
+            <param name="options">An object that specifies serialization options to use.</param>
         </member>
         <member name="T:Json.Schema.OpenApi.ExternalDocsKeyword">
             <summary>
@@ -128,25 +148,35 @@
             The value can be null, a primitive, an array or an object.
             </param>
         </member>
-        <member name="M:Json.Schema.OpenApi.ExternalDocsKeyword.Validate(Json.Schema.ValidationContext)">
+        <member name="M:Json.Schema.OpenApi.ExternalDocsKeyword.GetConstraint(Json.Schema.SchemaConstraint,System.Collections.Generic.IReadOnlyList{Json.Schema.KeywordConstraint},Json.Schema.EvaluationContext)">
             <summary>
-            Provides validation for the keyword.
+            Builds a constraint object for a keyword.
             </summary>
-            <param name="context">Contextual details for the validation process.</param>
+            <param name="schemaConstraint">The <see cref="T:Json.Schema.SchemaConstraint"/> for the schema object that houses this keyword.</param>
+            <param name="localConstraints">
+            The set of other <see cref="T:Json.Schema.KeywordConstraint"/>s that have been processed prior to this one.
+            Will contain the constraints for keyword dependencies.
+            </param>
+            <param name="context">The <see cref="T:Json.Schema.EvaluationContext"/>.</param>
+            <returns>A constraint object.</returns>
         </member>
-        <member name="M:Json.Schema.OpenApi.ExternalDocsKeyword.Equals(Json.Schema.OpenApi.ExternalDocsKeyword)">
-            <summary>Indicates whether the current object is equal to another object of the same type.</summary>
-            <param name="other">An object to compare with this object.</param>
-            <returns>true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.</returns>
+        <member name="T:Json.Schema.OpenApi.ExternalDocsKeywordJsonConverter">
+            <summary>
+            JSON converter for <see cref="T:Json.Schema.OpenApi.ExternalDocsKeyword"/>.
+            </summary>
         </member>
-        <member name="M:Json.Schema.OpenApi.ExternalDocsKeyword.Equals(System.Object)">
-            <summary>Determines whether the specified object is equal to the current object.</summary>
-            <param name="obj">The object to compare with the current object.</param>
-            <returns>true if the specified object  is equal to the current object; otherwise, false.</returns>
+        <member name="M:Json.Schema.OpenApi.ExternalDocsKeywordJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>Reads and converts the JSON to type <see cref="T:Json.Schema.OpenApi.ExternalDocsKeyword"/>.</summary>
+            <param name="reader">The reader.</param>
+            <param name="typeToConvert">The type to convert.</param>
+            <param name="options">An object that specifies serialization options to use.</param>
+            <returns>The converted value.</returns>
         </member>
-        <member name="M:Json.Schema.OpenApi.ExternalDocsKeyword.GetHashCode">
-            <summary>Serves as the default hash function.</summary>
-            <returns>A hash code for the current object.</returns>
+        <member name="M:Json.Schema.OpenApi.ExternalDocsKeywordJsonConverter.Write(System.Text.Json.Utf8JsonWriter,Json.Schema.OpenApi.ExternalDocsKeyword,System.Text.Json.JsonSerializerOptions)">
+            <summary>Writes a specified value as JSON.</summary>
+            <param name="writer">The writer to write to.</param>
+            <param name="value">The value to convert to JSON.</param>
+            <param name="options">An object that specifies serialization options to use.</param>
         </member>
         <member name="T:Json.Schema.OpenApi.Formats">
             <summary>
@@ -229,6 +259,31 @@
             The value can be null, a primitive, an array or an object.
             </param>
             <returns>The builder.</returns>
+        </member>
+        <member name="T:Json.Schema.OpenApi.JsonSchemaExtensions">
+            <summary>
+            Some extensions for <see cref="T:Json.Schema.JsonSchema"/>
+            </summary>
+        </member>
+        <member name="M:Json.Schema.OpenApi.JsonSchemaExtensions.GetDiscriminator(Json.Schema.JsonSchema)">
+            <summary>
+            Gets the `discriminator` keyword if it exists.
+            </summary>
+        </member>
+        <member name="M:Json.Schema.OpenApi.JsonSchemaExtensions.GetExample(Json.Schema.JsonSchema)">
+            <summary>
+            Gets the value of `example` if the keyword exists.
+            </summary>
+        </member>
+        <member name="M:Json.Schema.OpenApi.JsonSchemaExtensions.GetExternalDocs(Json.Schema.JsonSchema)">
+            <summary>
+            Gets the value of `externalDocs` if the keyword exists.
+            </summary>
+        </member>
+        <member name="M:Json.Schema.OpenApi.JsonSchemaExtensions.GetXml(Json.Schema.JsonSchema)">
+            <summary>
+            Gets the `xml` keyword if it exists.
+            </summary>
         </member>
         <member name="T:Json.Schema.OpenApi.MetaSchemas">
             <summary>
@@ -350,25 +405,35 @@
             The value can be null, a primitive, an array or an object.
             </param>
         </member>
-        <member name="M:Json.Schema.OpenApi.XmlKeyword.Validate(Json.Schema.ValidationContext)">
+        <member name="M:Json.Schema.OpenApi.XmlKeyword.GetConstraint(Json.Schema.SchemaConstraint,System.Collections.Generic.IReadOnlyList{Json.Schema.KeywordConstraint},Json.Schema.EvaluationContext)">
             <summary>
-            Provides validation for the keyword.
+            Builds a constraint object for a keyword.
             </summary>
-            <param name="context">Contextual details for the validation process.</param>
+            <param name="schemaConstraint">The <see cref="T:Json.Schema.SchemaConstraint"/> for the schema object that houses this keyword.</param>
+            <param name="localConstraints">
+            The set of other <see cref="T:Json.Schema.KeywordConstraint"/>s that have been processed prior to this one.
+            Will contain the constraints for keyword dependencies.
+            </param>
+            <param name="context">The <see cref="T:Json.Schema.EvaluationContext"/>.</param>
+            <returns>A constraint object.</returns>
         </member>
-        <member name="M:Json.Schema.OpenApi.XmlKeyword.Equals(Json.Schema.OpenApi.XmlKeyword)">
-            <summary>Indicates whether the current object is equal to another object of the same type.</summary>
-            <param name="other">An object to compare with this object.</param>
-            <returns>true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.</returns>
+        <member name="T:Json.Schema.OpenApi.XmlKeywordJsonConverter">
+            <summary>
+            JSON converter for <see cref="T:Json.Schema.OpenApi.XmlKeyword"/>.
+            </summary>
         </member>
-        <member name="M:Json.Schema.OpenApi.XmlKeyword.Equals(System.Object)">
-            <summary>Determines whether the specified object is equal to the current object.</summary>
-            <param name="obj">The object to compare with the current object.</param>
-            <returns>true if the specified object  is equal to the current object; otherwise, false.</returns>
+        <member name="M:Json.Schema.OpenApi.XmlKeywordJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>Reads and converts the JSON to type <see cref="T:Json.Schema.OpenApi.XmlKeyword"/>.</summary>
+            <param name="reader">The reader.</param>
+            <param name="typeToConvert">The type to convert.</param>
+            <param name="options">An object that specifies serialization options to use.</param>
+            <returns>The converted value.</returns>
         </member>
-        <member name="M:Json.Schema.OpenApi.XmlKeyword.GetHashCode">
-            <summary>Serves as the default hash function.</summary>
-            <returns>A hash code for the current object.</returns>
+        <member name="M:Json.Schema.OpenApi.XmlKeywordJsonConverter.Write(System.Text.Json.Utf8JsonWriter,Json.Schema.OpenApi.XmlKeyword,System.Text.Json.JsonSerializerOptions)">
+            <summary>Writes a specified value as JSON.</summary>
+            <param name="writer">The writer to write to.</param>
+            <param name="value">The value to convert to JSON.</param>
+            <param name="options">An object that specifies serialization options to use.</param>
         </member>
     </members>
 </doc>

@@ -13,11 +13,24 @@
             <returns>The converted value.</returns>
             <exception cref="T:System.Text.Json.JsonException">Element was not a string or could not identify the JSON value as a known enum value.</exception>
         </member>
+        <member name="M:Json.More.EnumStringConverter`1.ReadAsPropertyName(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>Reads a dictionary key from a JSON property name.</summary>
+            <param name="reader">The <see cref="T:System.Text.Json.Utf8JsonReader" /> to read from.</param>
+            <param name="typeToConvert">The type to convert.</param>
+            <param name="options">The options to use when reading the value.</param>
+            <returns>The value that was converted.</returns>
+        </member>
         <member name="M:Json.More.EnumStringConverter`1.Write(System.Text.Json.Utf8JsonWriter,`0,System.Text.Json.JsonSerializerOptions)">
             <summary>Writes a specified value as JSON.</summary>
             <param name="writer">The writer to write to.</param>
             <param name="value">The value to convert to JSON.</param>
             <param name="options">An object that specifies serialization options to use.</param>
+        </member>
+        <member name="M:Json.More.EnumStringConverter`1.WriteAsPropertyName(System.Text.Json.Utf8JsonWriter,`0,System.Text.Json.JsonSerializerOptions)">
+            <summary>Writes a dictionary key as a JSON property name.</summary>
+            <param name="writer">The <see cref="T:System.Text.Json.Utf8JsonWriter" /> to write to.</param>
+            <param name="value">The value to convert. The value of <see cref="P:System.Text.Json.Serialization.JsonConverter`1.HandleNull" /> determines if the converter handles <see langword="null" /> values.</param>
+            <param name="options">The options to use when writing the value.</param>
         </member>
         <member name="T:Json.More.JsonDocumentEqualityComparer">
              <summary>
@@ -341,11 +354,12 @@
              - https://github.com/dotnet/runtime/issues/33388
              </remarks>
         </member>
-        <member name="M:Json.More.JsonNodeExtensions.AsJsonString(System.Text.Json.Nodes.JsonNode)">
+        <member name="M:Json.More.JsonNodeExtensions.AsJsonString(System.Text.Json.Nodes.JsonNode,System.Text.Json.JsonSerializerOptions)">
             <summary>
             Gets JSON string representation for <see cref="T:System.Text.Json.Nodes.JsonNode"/>, including null support.
             </summary>
             <param name="node">A node.</param>
+            <param name="options">Serializer options</param>
             <returns>JSON string representation.</returns>
         </member>
         <member name="M:Json.More.JsonNodeExtensions.GetNumber(System.Text.Json.Nodes.JsonValue)">
@@ -364,7 +378,7 @@
         </member>
         <member name="M:Json.More.JsonNodeExtensions.Copy(System.Text.Json.Nodes.JsonNode)">
             <summary>
-            Creates a copy of a node by passing it through the serializer.
+            Creates a deep copy of a node.
             </summary>
             <param name="source">A node.</param>
             <returns>A duplicate of the node.</returns>
@@ -396,6 +410,29 @@
             <param name="nodes">The nodes.</param>
             <returns>A JSON array.</returns>
         </member>
+        <member name="M:Json.More.JsonNodeExtensions.GetPathFromRoot(System.Text.Json.Nodes.JsonNode,System.Boolean)">
+             <summary>
+             Gets a JSON Path string that indicates the node's location within
+             its JSON structure.
+             </summary>
+             <param name="node">The node to find.</param>
+             <param name="useShorthand">Determines whether shorthand syntax is used when possible, e.g. `$.foo`.</param>
+             <exception cref="T:System.ArgumentNullException">Null nodes cannot be located as the parent cannot be determined.</exception>
+             <returns>
+            	A string containing a JSON Path.
+             </returns>
+        </member>
+        <member name="M:Json.More.JsonNodeExtensions.GetPointerFromRoot(System.Text.Json.Nodes.JsonNode)">
+             <summary>
+             Gets a JSON Pointer string that indicates the node's location within
+             its JSON structure.
+             </summary>
+             <param name="node">The node to find.</param>
+             <exception cref="T:System.ArgumentNullException">Null nodes cannot be located as the parent cannot be determined.</exception>
+             <returns>
+            	A string containing a JSON Pointer.
+             </returns>
+        </member>
         <member name="T:Json.More.JsonNull">
              <summary>
              Provides a <see cref="T:System.Text.Json.Nodes.JsonNode"/> instance to use as null.
@@ -414,6 +451,24 @@
             <summary>
             Provides a static instance of this class wrapped in a <see cref="T:System.Text.Json.Nodes.JsonNode"/>.
             </summary>
+        </member>
+        <member name="T:Json.More.JsonSerializerOptionsExtensions">
+            <summary>
+            Provides extension functionality for <see cref="T:System.Text.Json.JsonSerializerOptions"/>.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Json.More.JsonSerializerOptionsExtensions.GetConverter``1(System.Text.Json.JsonSerializerOptions)" -->
+        <member name="M:Json.More.JsonSerializerOptionsExtensions.Read``1(System.Text.Json.JsonSerializerOptions,System.Text.Json.Utf8JsonReader@)">
+            <summary>
+            Read and convert the JSON to T.
+            </summary>
+            <remarks>
+            A converter may throw any Exception, but should throw <cref>JsonException</cref> when the JSON is invalid.
+            </remarks>
+            <typeparam name="T">The <see cref="T:System.Type"/> to convert.</typeparam>
+            <param name="options">The <see cref="T:System.Text.Json.JsonSerializerOptions"/> being used.</param>
+            <param name="reader">The <see cref="T:System.Text.Json.Utf8JsonReader"/> to read from.</param>
+            <returns>The value that was converted.</returns>
         </member>
         <member name="T:Json.More.TypeExtensions">
             <summary>

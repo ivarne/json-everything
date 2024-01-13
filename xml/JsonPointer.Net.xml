@@ -48,48 +48,26 @@
             The empty pointer.
             </summary>
         </member>
-        <member name="F:Json.Pointer.JsonPointer.UrlEmpty">
-            <summary>
-            The empty pointer in URL-style.
-            </summary>
-        </member>
-        <member name="P:Json.Pointer.JsonPointer.Source">
-            <summary>
-            Gets the source string for the pointer.
-            </summary>
-        </member>
         <member name="P:Json.Pointer.JsonPointer.Segments">
             <summary>
             Gets the collection of pointer segments.
             </summary>
         </member>
-        <member name="P:Json.Pointer.JsonPointer.IsUriEncoded">
-            <summary>
-            Gets whether the pointer is URL-encoded.
-            </summary>
-        </member>
-        <member name="P:Json.Pointer.JsonPointer.Kind">
-            <summary>
-            Gets the kind of pointer.
-            </summary>
-        </member>
-        <member name="M:Json.Pointer.JsonPointer.Parse(System.String,Json.Pointer.JsonPointerKind)">
+        <member name="M:Json.Pointer.JsonPointer.Parse(System.String)">
             <summary>
             Parses a JSON Pointer from a string.
             </summary>
             <param name="source">The source string.</param>
-            <param name="pointerKind">(optional) Restricts the kind of pointer.  <see cref="F:Json.Pointer.JsonPointerKind.Unspecified"/> (default) allows both.</param>
             <returns>A JSON Pointer.</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="source"/> is null.</exception>
             <exception cref="T:Json.Pointer.PointerParseException"><paramref name="source"/> does not contain a valid pointer or contains a pointer of the wrong kind.</exception>
         </member>
-        <member name="M:Json.Pointer.JsonPointer.TryParse(System.String,Json.Pointer.JsonPointer@,Json.Pointer.JsonPointerKind)">
+        <member name="M:Json.Pointer.JsonPointer.TryParse(System.String,Json.Pointer.JsonPointer@)">
             <summary>
             Parses a JSON Pointer from a string.
             </summary>
             <param name="source">The source string.</param>
             <param name="pointer">The resulting pointer.</param>
-            <param name="pointerKind">(optional) Restricts the kind of pointer.  <see cref="F:Json.Pointer.JsonPointerKind.Unspecified"/> (default) allows both.</param>
             <returns>`true` if the parse was successful; `false` otherwise.</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="source"/> is null.</exception>
         </member>
@@ -101,20 +79,20 @@
             <returns>The JSON Pointer.</returns>
             <remarks>This method creates un-encoded pointers only.</remarks>
         </member>
-        <member name="M:Json.Pointer.JsonPointer.Create(System.Collections.Generic.IEnumerable{Json.Pointer.PointerSegment},System.Boolean)">
+        <member name="M:Json.Pointer.JsonPointer.Create(System.Collections.Generic.IEnumerable{Json.Pointer.PointerSegment})">
             <summary>
             Creates a new JSON Pointer from a collection of segments.
             </summary>
             <param name="segments">A collection of segments.</param>
-            <param name="isUriEncoded">Whether the pointer should be URL-encoded.</param>
             <returns>The JSON Pointer.</returns>
         </member>
-        <member name="M:Json.Pointer.JsonPointer.Create``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+        <member name="M:Json.Pointer.JsonPointer.Create``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},Json.Pointer.PointerCreationOptions)">
             <summary>
             Generates a JSON Pointer from a lambda expression.
             </summary>
             <typeparam name="T">The type of the object.</typeparam>
             <param name="expression">The lambda expression which gives the pointer path.</param>
+            <param name="options">(optional) Options for creating the pointer.</param>
             <returns>The JSON Pointer.</returns>
             <exception cref="T:System.NotSupportedException">
             Thrown when the lambda expression contains a node that is not a property access or
@@ -150,9 +128,14 @@
             <param name="result">The result, if return value is true; null otherwise</param>
             <returns>true if a value exists at the indicate path; false otherwise.</returns>
         </member>
+        <member name="M:Json.Pointer.JsonPointer.ToString(Json.Pointer.JsonPointerStyle)">
+            <summary>Returns the string representation of this instance.</summary>
+            <param name="pointerStyle">Indicates whether to URL-encode the pointer.</param>
+            <returns>The string representation.</returns>
+        </member>
         <member name="M:Json.Pointer.JsonPointer.ToString">
-            <summary>Returns the fully qualified type name of this instance.</summary>
-            <returns>The fully qualified type name.</returns>
+            <summary>Returns the string representation of this instance.</summary>
+            <returns>The string representation.</returns>
         </member>
         <member name="M:Json.Pointer.JsonPointer.Equals(Json.Pointer.JsonPointer)">
             <summary>Indicates whether the current object is equal to another object of the same type.</summary>
@@ -184,24 +167,94 @@
             <param name="right">A JSON Pointer.</param>
             <returns>`false` if the pointers are equal; `true` otherwise.</returns>
         </member>
-        <member name="T:Json.Pointer.JsonPointerKind">
+        <member name="T:Json.Pointer.JsonPointerJsonConverter">
+            <summary>
+            Converter for <see cref="T:Json.Pointer.JsonPointer"/>.
+            </summary>
+        </member>
+        <member name="M:Json.Pointer.JsonPointerJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>Reads and converts the JSON to type <see cref="T:Json.Pointer.JsonPointer"/>.</summary>
+            <param name="reader">The reader.</param>
+            <param name="typeToConvert">The type to convert.</param>
+            <param name="options">An object that specifies serialization options to use.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="M:Json.Pointer.JsonPointerJsonConverter.Write(System.Text.Json.Utf8JsonWriter,Json.Pointer.JsonPointer,System.Text.Json.JsonSerializerOptions)">
+            <summary>Writes a specified value as JSON.</summary>
+            <param name="writer">The writer to write to.</param>
+            <param name="value">The value to convert to JSON.</param>
+            <param name="options">An object that specifies serialization options to use.</param>
+        </member>
+        <member name="T:Json.Pointer.JsonPointerStyle">
             <summary>
             Enumerates the different styles of JSON pointers.
             </summary>
         </member>
-        <member name="F:Json.Pointer.JsonPointerKind.Unspecified">
+        <member name="F:Json.Pointer.JsonPointerStyle.Unspecified">
             <summary>
             No format specified.
             </summary>
         </member>
-        <member name="F:Json.Pointer.JsonPointerKind.Plain">
+        <member name="F:Json.Pointer.JsonPointerStyle.Plain">
             <summary>
             Indicates only plain JSON pointers.
             </summary>
         </member>
-        <member name="F:Json.Pointer.JsonPointerKind.UriEncoded">
+        <member name="F:Json.Pointer.JsonPointerStyle.UriEncoded">
             <summary>
             Indicates only URI-encoded JSON pointers.
+            </summary>
+        </member>
+        <member name="T:Json.Pointer.JsonPointerTypeConverter">
+            <summary>
+            <see cref="T:System.ComponentModel.TypeConverter"/> for <see cref="T:Json.Pointer.JsonPointer"/>.
+            </summary>
+        </member>
+        <member name="F:Json.Pointer.JsonPointerTypeConverter._standardValues">
+            <summary>
+            The standard values used by this converter.
+            </summary>
+            <remarks>
+              This field is initialized using a so-called poor man's lazy in <see cref="M:Json.Pointer.JsonPointerTypeConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)"/>.
+            </remarks>
+        </member>
+        <member name="M:Json.Pointer.JsonPointerTypeConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Json.Pointer.JsonPointerTypeConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Json.Pointer.JsonPointerTypeConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Json.Pointer.JsonPointerTypeConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Json.Pointer.JsonPointerTypeConverter.GetStandardValuesSupported(System.ComponentModel.ITypeDescriptorContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Json.Pointer.JsonPointerTypeConverter.GetStandardValuesExclusive(System.ComponentModel.ITypeDescriptorContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Json.Pointer.JsonPointerTypeConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Json.Pointer.JsonPointerTypeConverter.IsValid(System.ComponentModel.ITypeDescriptorContext,System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Json.Pointer.PointerCreationOptions">
+            <summary>
+            Options for creating pointers using <see cref="M:Json.Pointer.JsonPointer.Create``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},Json.Pointer.PointerCreationOptions)"/>.
+            </summary>
+        </member>
+        <member name="F:Json.Pointer.PointerCreationOptions.Default">
+            <summary>
+            Default settings.
+            </summary>
+        </member>
+        <member name="P:Json.Pointer.PointerCreationOptions.PropertyNameResolver">
+            <summary>
+            Gets or sets the property naming resolver.  Default is <see cref="F:Json.Pointer.PropertyNameResolvers.AsDeclared"/>.
             </summary>
         </member>
         <member name="T:Json.Pointer.PointerParseException">
@@ -229,45 +282,39 @@
             Represents a single segment of a JSON Pointer.
             </summary>
         </member>
-        <member name="P:Json.Pointer.PointerSegment.Source">
-            <summary>
-            Gets the source string.
-            </summary>
-        </member>
         <member name="P:Json.Pointer.PointerSegment.Value">
             <summary>
             Gets the segment value.
             </summary>
-            <remarks>
-            This may differ from <see cref="P:Json.Pointer.PointerSegment.Source"/> in that the segment may be URL-encoded.  This contains the decoded value.
-            </remarks>
         </member>
-        <member name="M:Json.Pointer.PointerSegment.Parse(System.String,System.Boolean)">
+        <member name="M:Json.Pointer.PointerSegment.Parse(System.String)">
             <summary>
             Parses a JSON Pointer segment from a string.
             </summary>
             <param name="source">The source string.</param>
-            <param name="uriFormatted">Indicates whether the segment should be URL-decoded.</param>
             <returns>A JSON Pointer segment.</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="source"/> is null.</exception>
             <exception cref="T:Json.Pointer.PointerParseException"><paramref name="source"/> contains an invalid escape sequence or an invalid URI-encoded sequence or ends with `~`.</exception>
         </member>
-        <member name="M:Json.Pointer.PointerSegment.TryParse(System.String,System.Boolean,Json.Pointer.PointerSegment@)">
+        <member name="M:Json.Pointer.PointerSegment.TryParse(System.String,Json.Pointer.PointerSegment@)">
             <summary>
             Parses a JSON Pointer segment from a string.
             </summary>
             <param name="source">The source string.</param>
-            <param name="uriFormatted">Indicates whether the segment should be URL-decoded.</param>
             <param name="segment">The resulting segments.</param>
             <returns>`true` if the parse was successful; `false` otherwise.</returns>
         </member>
-        <member name="M:Json.Pointer.PointerSegment.Create(System.String,System.Boolean)">
+        <member name="M:Json.Pointer.PointerSegment.Create(System.String)">
             <summary>
             Creates a new <see cref="T:Json.Pointer.PointerSegment"/>.
             </summary>
             <param name="value">The value.</param>
-            <param name="uriFormatted">Whether the segment should be URL-encoded.</param>
             <returns></returns>
+        </member>
+        <member name="M:Json.Pointer.PointerSegment.ToString(Json.Pointer.JsonPointerStyle)">
+            <summary>Returns the string representation of this instance.</summary>
+            <param name="pointerStyle">Indicates whether to URL-encode the pointer.</param>
+            <returns>The string representation.</returns>
         </member>
         <member name="M:Json.Pointer.PointerSegment.Equals(Json.Pointer.PointerSegment)">
             <summary>Indicates whether the current object is equal to another object of the same type.</summary>
@@ -299,6 +346,13 @@
             <param name="right">A JSON Pointer.</param>
             <returns>`false` if the pointers are equal; `true` otherwise.</returns>
         </member>
+        <member name="M:Json.Pointer.PointerSegment.op_Implicit(System.Int32)~Json.Pointer.PointerSegment">
+            <summary>
+            Implicitly casts an <see cref="T:System.UInt32"/> to a <see cref="T:Json.Pointer.PointerSegment"/>.
+            </summary>
+            <param name="value">A pointer segment that represents the value.</param>
+            <remarks>No URI encoding is performed for implicit casts.</remarks>
+        </member>
         <member name="M:Json.Pointer.PointerSegment.op_Implicit(System.UInt32)~Json.Pointer.PointerSegment">
             <summary>
             Implicitly casts an <see cref="T:System.UInt32"/> to a <see cref="T:Json.Pointer.PointerSegment"/>.
@@ -312,6 +366,53 @@
             </summary>
             <param name="value">A pointer segment that represents the value.</param>
             <remarks>No URI encoding is performed for implicit casts.</remarks>
+        </member>
+        <member name="T:Json.Pointer.PropertyNameResolver">
+            <summary>
+            Declares a property name resolution which is used to provide a property name.
+            </summary>
+            <param name="input">The property.</param>
+            <returns>The property name</returns>
+        </member>
+        <member name="T:Json.Pointer.PropertyNameResolvers">
+            <summary>
+            Defines a set of predefined property name resolution methods.
+            </summary>
+        </member>
+        <member name="F:Json.Pointer.PropertyNameResolvers.AsDeclared">
+            <summary>
+            Makes no changes. Properties are generated with the name of the property in code.
+            </summary>
+        </member>
+        <member name="F:Json.Pointer.PropertyNameResolvers.CamelCase">
+            <summary>
+            Property names to camel case (e.g. `camelCase`).
+            </summary>
+        </member>
+        <member name="F:Json.Pointer.PropertyNameResolvers.PascalCase">
+            <summary>
+            Property names to pascal case (e.g. `PascalCase`).
+            </summary>
+        </member>
+        <member name="F:Json.Pointer.PropertyNameResolvers.SnakeCase">
+            <summary>
+            Property names to snake case (e.g. `Snake_Case`).
+            </summary>
+        </member>
+        <member name="F:Json.Pointer.PropertyNameResolvers.UpperSnakeCase">
+            <summary>
+            Property names to upper snake case (e.g. `UPPER_SNAKE_CASE`).
+            </summary>
+        </member>
+        <member name="F:Json.Pointer.PropertyNameResolvers.KebabCase">
+            <summary>
+            Property names to kebab case (e.g. `Kebab-Case`).
+            </summary>
+        </member>
+        <member name="F:Json.Pointer.PropertyNameResolvers.UpperKebabCase">
+            <summary>
+            Property names to upper kebab case (e.g. `UPPER-KEBAB-CASE`).
+            </summary>
         </member>
         <member name="T:Json.Pointer.RelativeJsonPointer">
             <summary>
@@ -404,6 +505,24 @@
         <member name="M:Json.Pointer.RelativeJsonPointer.ToString">
             <summary>Returns the fully qualified type name of this instance.</summary>
             <returns>The fully qualified type name.</returns>
+        </member>
+        <member name="T:Json.Pointer.RelativeJsonPointerJsonConverter">
+            <summary>
+            Converter for <see cref="T:Json.Pointer.RelativeJsonPointer"/>.
+            </summary>
+        </member>
+        <member name="M:Json.Pointer.RelativeJsonPointerJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>Reads and converts the JSON to type <see cref="T:Json.Pointer.RelativeJsonPointer"/>.</summary>
+            <param name="reader">The reader.</param>
+            <param name="typeToConvert">The type to convert.</param>
+            <param name="options">An object that specifies serialization options to use.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="M:Json.Pointer.RelativeJsonPointerJsonConverter.Write(System.Text.Json.Utf8JsonWriter,Json.Pointer.RelativeJsonPointer,System.Text.Json.JsonSerializerOptions)">
+            <summary>Writes a specified value as JSON.</summary>
+            <param name="writer">The writer to write to.</param>
+            <param name="value">The value to convert to JSON.</param>
+            <param name="options">An object that specifies serialization options to use.</param>
         </member>
     </members>
 </doc>
