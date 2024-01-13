@@ -204,4 +204,13 @@ public class GithubTests
 
 		Assert.IsTrue(expected.IsEquivalentTo(patchResult.Result));
 	}
+
+	[Test]
+	public void IssueXXX_PatchTestEmptyArray()
+	{
+		var doc = JsonNode.Parse("{\"empty\":[]");
+		var jsonPatch = new JsonPatch(PatchOperation.Test(JsonPointer.Parse("/empty"), "[]"));
+		var result = jsonPatch.Apply(doc);
+		Assert.IsTrue(result.IsSuccess);
+	}
 }
